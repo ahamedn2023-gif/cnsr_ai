@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Skin Cancer AI</title>
+
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Skin Cancer Detection AI</h1>
+
+<form action="/predict" method="POST" enctype="multipart/form-data">
+
+<input type="file" id="image" name="image" required>
+
+<br>
+
+<img id="preview">
+
+<br><br>
+
+<button type="submit">
+
+Predict
+
+</button>
+
+<div class="loading" id="loading">
+
+Predicting...
+
+</div>
+
+</form>
+
+</div>
+
+<script src="{{ url_for('static',filename='script.js') }}"></script>
+
+</body>
+
+</html>
