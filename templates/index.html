@@ -1,48 +1,522 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Skin Cancer AI</title>
+    <title>SkinCheck AI</title>
 
-<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5faf9;
+            color: #153a34;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            background: white;
+            border-bottom: 1px solid #e3efec;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+            background: #0c927c;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo span {
+            color: #0c927c;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .anonymous-id {
+            font-size: 12px;
+            color: #718782;
+        }
+
+        .history {
+            text-decoration: none;
+            background: #e8f5f2;
+            color: #087763;
+
+            padding: 11px 16px;
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1150px;
+            margin: auto;
+
+            padding: 65px 6%;
+
+            display: grid;
+            grid-template-columns: 1fr 430px;
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            background: #e3f4ef;
+            color: #087763;
+
+            padding: 8px 13px;
+            border-radius: 30px;
+
+            font-size: 11px;
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 55px;
+            line-height: 1.05;
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #0c927c;
+        }
+
+        .description {
+            color: #687e79;
+            font-size: 16px;
+            line-height: 1.7;
+
+            max-width: 520px;
+            margin-bottom: 25px;
+        }
+
+        .privacy {
+            display: inline-block;
+
+            background: white;
+            border: 1px solid #dfece9;
+
+            padding: 12px 16px;
+            border-radius: 12px;
+
+            color: #607773;
+            font-size: 12px;
+        }
+
+        /* UPLOAD */
+
+        .upload-card {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            border: 1px solid #e1eeeb;
+
+            box-shadow:
+                0 20px 55px rgba(25, 75, 65, 0.12);
+        }
+
+        .upload-card h2 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .upload-card > p {
+            color: #7a8e8a;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .drop-zone {
+            min-height: 240px;
+
+            border: 2px dashed #b8d8d2;
+            border-radius: 19px;
+
+            background: #f8fcfb;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 20px;
+        }
+
+        .upload-icon {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 18px;
+
+            background: #e3f5f0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            margin-bottom: 15px;
+        }
+
+        .drop-zone h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .drop-zone p {
+            color: #82938f;
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .choose {
+            background: #153a34;
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        #file-name {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #0c927c;
+            font-weight: bold;
+        }
+
+        .predict {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 15px;
+
+            border: none;
+            border-radius: 11px;
+
+            background: #0c927c;
+            color: white;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .predict:hover {
+            background: #087763;
+        }
+
+        /* FEATURES */
+
+        .features {
+            background: white;
+
+            padding: 50px 7%;
+
+            border-top: 1px solid #e5efed;
+        }
+
+        .feature-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .feature {
+            border: 1px solid #e3eeeb;
+            border-radius: 17px;
+
+            padding: 25px;
+        }
+
+        .feature-icon {
+            font-size: 25px;
+            margin-bottom: 13px;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #718681;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 800px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .anonymous-id {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 45px 20px;
+                gap: 40px;
+            }
+
+            h1 {
+                font-size: 43px;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- NAVBAR -->
 
-<h1>Skin Cancer Detection AI</h1>
+<nav>
 
-<form action="/predict" method="POST" enctype="multipart/form-data">
+    <div class="logo">
+        <div class="logo-icon">✚</div>
+        SkinCheck <span>AI</span>
+    </div>
 
-<input type="file" id="image" name="image" required>
+    <div class="nav-right">
 
-<br>
+        <div class="anonymous-id">
+            Anonymous ID:
+            <strong>
+                {{ anonymous_id if anonymous_id else "ANONYMOUS" }}
+            </strong>
+        </div>
 
-<img id="preview">
+        <a class="history" href="/history">
+            View History
+        </a>
 
-<br><br>
+    </div>
 
-<button type="submit">
+</nav>
 
-Predict
 
-</button>
+<!-- HERO -->
 
-<div class="loading" id="loading">
+<section class="hero">
 
-Predicting...
+    <div>
 
-</div>
+        <div class="badge">
+            AI-ASSISTED HEALTHCARE
+        </div>
 
-</form>
+        <h1>
+            Understand your
+            <span>skin health.</span>
+        </h1>
 
-</div>
+        <p class="description">
+            Upload an image of a skin lesion and let our
+            AI model provide a preliminary classification
+            between benign and malignant patterns.
+        </p>
 
-<script src="{{ url_for('static',filename='script.js') }}"></script>
+        <div class="privacy">
+            🔒 Anonymous • Private • No personal information required
+        </div>
+
+    </div>
+
+
+    <!-- UPLOAD CARD -->
+
+    <div class="upload-card">
+
+        <h2>Analyze a Skin Image</h2>
+
+        <p>
+            Upload a clear image of the affected area.
+        </p>
+
+        <form action="/predict"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <div class="drop-zone">
+
+                <div class="upload-icon">
+                    📷
+                </div>
+
+                <h3>Upload your image</h3>
+
+                <p>
+                    JPG, JPEG or PNG
+                </p>
+
+                <label for="image" class="choose">
+                    Choose Image
+                </label>
+
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    required
+                    onchange="showFileName()"
+                >
+
+                <div id="file-name"></div>
+
+            </div>
+
+            <button class="predict" type="submit">
+                Analyze Image →
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="feature-container">
+
+        <div class="feature">
+
+            <div class="feature-icon">🤖</div>
+
+            <h3>AI Analysis</h3>
+
+            <p>
+                A trained deep-learning model analyzes
+                the uploaded image for classification.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🔐</div>
+
+            <h3>Anonymous Access</h3>
+
+            <p>
+                Use the system without providing
+                your name, email, or phone number.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">📊</div>
+
+            <h3>Prediction History</h3>
+
+            <p>
+                Your anonymous prediction records can
+                be viewed through the history page.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+function showFileName() {
+
+    const fileInput = document.getElementById("image");
+    const fileName = document.getElementById("file-name");
+
+    if (fileInput.files.length > 0) {
+
+        fileName.innerHTML =
+            "✓ " + fileInput.files[0].name;
+
+    }
+
+}
+
+</script>
 
 </body>
-
 </html>

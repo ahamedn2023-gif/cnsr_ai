@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinCheck AI - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #f4faf8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #163b35;
+        }
+
+        .card {
+            width: 430px;
+            max-width: 92%;
+            background: white;
+            border-radius: 26px;
+            padding: 45px 38px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(20, 70, 60, 0.12);
+            border: 1px solid #e2efeb;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            background: #0c927c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: #0c927c;
+        }
+
+        .subtitle {
+            color: #718782;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .anonymous-box {
+            background: #f1f9f7;
+            border-radius: 15px;
+            padding: 18px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .anonymous-box strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #163b35;
+        }
+
+        .anonymous-box p {
+            color: #718782;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            background: #0c927c;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #087763;
+        }
+
+        .privacy {
+            margin-top: 20px;
+            color: #8a9c98;
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">✚</div>
+
+    <h1>SkinCheck <span>AI</span></h1>
+
+    <p class="subtitle">
+        AI-assisted skin lesion screening designed
+        to provide a quick preliminary assessment.
+    </p>
+
+    <div class="anonymous-box">
+        <strong>🔒 Anonymous Access</strong>
+        <p>
+            No name, email address, or phone number is required.
+            An anonymous ID will be generated for your session.
+        </p>
+    </div>
+
+    <form action="/login" method="POST">
+        <button type="submit">
+            Continue Anonymously →
+        </button>
+    </form>
+
+    <div class="privacy">
+        Your privacy matters • No personal identity required
+    </div>
+
+</div>
+
+</body>
+</html>
