@@ -1,12 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-import numpy as np
-import sqlite3
 import os
+
+# Tell TensorFlow not to look for a GPU on Render
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 import uuid
+import sqlite3
+import numpy as np
+
 from datetime import datetime
 
+from flask import Flask, render_template, request, redirect, url_for, session
+
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 app = Flask(__name__)
 app.secret_key = "change-this-secret-key"
 
@@ -16,9 +22,17 @@ app.secret_key = "change-this-secret-key"
 UPLOAD_FOLDER = "static/uploads"
 DATABASE = "database.db"
 
-app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config["UPLOAD_FOLDER"] = os.path.join(
+    app.static_folder,
+    "uploads"
+)
+
+os.makedirs(
+    app.config["UPLOAD_FOLDER"],
+    exist_ok=True
+)
+
 
 
 # -----------------------------
@@ -168,12 +182,12 @@ def predict():
     # Show result
     # -----------------------------
     return render_template(
-        "result.html",
-        prediction=prediction,
-        confidence=round(confidence, 2),
-        image_path=filepath,
-        anonymous_id=anonymous_id
-    )
+     "result.html",
+      prediction=prediction,
+     confidence=round(confidence, 2),
+     image_path=url_for("static", filename=f"uploads/{filename}"),
+     anonymous_id=anonymous_id
+     )
 
 
 # -----------------------------

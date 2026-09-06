@@ -1,488 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Prediction Result - SkinCheck AI</title>
+    <title>Prediction Result</title>
 
     <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f5faf9;
-            color: #163b35;
+            background: #eef7f8;
+            color: #173b42;
         }
-
-        /* NAVBAR */
-
-        nav {
-            height: 75px;
-
-            background: white;
-
-            border-bottom: 1px solid #e3efec;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 7%;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-
-            gap: 10px;
-
-            font-size: 21px;
-            font-weight: bold;
-        }
-
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-
-            border-radius: 11px;
-
-            background: #0c927c;
-            color: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo span {
-            color: #0c927c;
-        }
-
-        .history {
-            text-decoration: none;
-
-            background: #e8f5f2;
-            color: #087763;
-
-            padding: 11px 16px;
-
-            border-radius: 10px;
-
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        /* MAIN */
 
         .container {
-
-            max-width: 900px;
-
-            margin: auto;
-
-            padding: 60px 20px;
-        }
-
-        .heading {
+            max-width: 850px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
             text-align: center;
-
-            margin-bottom: 35px;
-        }
-
-        .badge {
-            display: inline-block;
-
-            background: #e3f4ef;
-            color: #087763;
-
-            padding: 8px 13px;
-
-            border-radius: 30px;
-
-            font-size: 11px;
-            font-weight: bold;
-
-            margin-bottom: 15px;
         }
 
         h1 {
-            font-size: 40px;
-
-            margin-bottom: 10px;
+            margin-bottom: 25px;
         }
 
-        .heading p {
-            color: #718782;
-            font-size: 14px;
-        }
-
-        /* RESULT CARD */
-
-        .result-card {
-
-            background: white;
-
-            border-radius: 25px;
-
-            padding: 35px;
-
-            box-shadow:
-                0 20px 55px rgba(25, 75, 65, 0.12);
-
-            border: 1px solid #e1eeeb;
-
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 35px;
-
-            align-items: center;
-        }
-
-        /* IMAGE */
-
-        .image-box {
-
-            background: #f1f8f6;
-
-            border-radius: 20px;
-
-            padding: 15px;
-
-            text-align: center;
-        }
-
-        .image-box img {
-
-            width: 100%;
-
-            max-height: 350px;
-
-            object-fit: contain;
-
-            border-radius: 14px;
-        }
-
-        /* RESULT */
-
-        .result-box {
-
-            text-align: center;
-        }
-
-        .result-icon {
-
-            width: 70px;
-            height: 70px;
-
-            border-radius: 50%;
-
-            background: #e3f5f0;
-
-            margin: 0 auto 18px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 32px;
-        }
-
-        .result-label {
-
-            font-size: 13px;
-
-            color: #82928e;
-
-            margin-bottom: 8px;
+        .result-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin: 20px;
         }
 
         .prediction {
-
-            font-size: 32px;
-
-            font-weight: 800;
-
-            color: #0c927c;
-
-            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 15px;
         }
 
         .confidence {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
 
-            background: #f0f8f6;
-
+        .button {
+            display: inline-block;
+            padding: 13px 25px;
+            margin: 8px;
             border-radius: 12px;
-
-            padding: 15px;
-
-            margin-bottom: 22px;
-        }
-
-        .confidence-title {
-
-            font-size: 12px;
-
-            color: #718782;
-
-            margin-bottom: 6px;
-        }
-
-        .confidence-value {
-
-            font-size: 23px;
-
-            font-weight: bold;
-
-            color: #163b35;
-        }
-
-        .warning {
-
-            background: #fff8e7;
-
-            color: #80682c;
-
-            padding: 14px;
-
-            border-radius: 11px;
-
-            font-size: 11px;
-
-            line-height: 1.5;
-
-            margin-bottom: 20px;
-        }
-
-        /* BUTTONS */
-
-        .buttons {
-
-            display: flex;
-
-            gap: 10px;
-        }
-
-        .btn {
-
-            flex: 1;
-
-            padding: 13px;
-
-            border-radius: 10px;
-
             text-decoration: none;
-
-            font-size: 13px;
-
-            font-weight: bold;
-
-            text-align: center;
-        }
-
-        .primary {
-
-            background: #0c927c;
-
+            background: #087f8c;
             color: white;
         }
 
-        .secondary {
-
-            background: #e8f5f2;
-
-            color: #087763;
+        .button:hover {
+            background: #05636d;
         }
-
-        /* DISCLAIMER */
-
-        .disclaimer {
-
-            margin-top: 25px;
-
-            text-align: center;
-
-            color: #8a9995;
-
-            font-size: 11px;
-
-            line-height: 1.6;
-        }
-
-        @media(max-width: 750px) {
-
-            .result-card {
-
-                grid-template-columns: 1fr;
-
-            }
-
-            h1 {
-
-                font-size: 32px;
-
-            }
-
-            .buttons {
-
-                flex-direction: column;
-
-            }
-
-        }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- NAVBAR -->
-
-<nav>
-
-    <div class="logo">
-
-        <div class="logo-icon">
-            ✚
-        </div>
-
-        SkinCheck <span>AI</span>
-
-    </div>
-
-    <a href="/history" class="history">
-        View History
-    </a>
-
-</nav>
-
-
-<!-- MAIN -->
-
 <div class="container">
 
+    <h1>Skin Analysis Result</h1>
 
-    <div class="heading">
+    <img src="{{ image_path }}"
+         alt="Uploaded skin image"
+         class="result-image">
 
-        <div class="badge">
-            ANALYSIS COMPLETE
-        </div>
-
-        <h1>
-            Prediction Result
-        </h1>
-
-        <p>
-            Here is the AI-assisted analysis of your uploaded image.
-        </p>
-
+    <div class="prediction">
+        {{ prediction }}
     </div>
 
-
-    <div class="result-card">
-
-
-        <!-- IMAGE -->
-
-        <div class="image-box">
-
-            {% if image_path %}
-
-                <img
-                    src="{{ image_path }}"
-                    alt="Uploaded skin image"
-                >
-
-            {% endif %}
-
-        </div>
-
-
-        <!-- RESULT -->
-
-        <div class="result-box">
-
-            <div class="result-icon">
-                🔬
-            </div>
-
-            <div class="result-label">
-                AI CLASSIFICATION
-            </div>
-
-            <div class="prediction">
-
-                {{ prediction }}
-
-            </div>
-
-
-            {% if confidence %}
-
-            <div class="confidence">
-
-                <div class="confidence-title">
-                    MODEL CONFIDENCE
-                </div>
-
-                <div class="confidence-value">
-                    {{ confidence }}
-                </div>
-
-            </div>
-
-            {% endif %}
-
-
-            <div class="warning">
-
-                ⚠️ This is an AI-assisted screening result,
-                not a medical diagnosis. Please consult a
-                qualified healthcare professional for proper
-                examination and diagnosis.
-
-            </div>
-
-
-            <div class="buttons">
-
-                <a href="/" class="btn primary">
-                    Analyze Another
-                </a>
-
-                <a href="/history" class="btn secondary">
-                    View History
-                </a>
-
-            </div>
-
-        </div>
-
-
+    <div class="confidence">
+        Confidence: {{ confidence }}%
     </div>
 
+    <p>
+        Anonymous ID: <strong>{{ anonymous_id }}</strong>
+    </p>
 
-    <div class="disclaimer">
+    <a href="{{ url_for('home') }}" class="button">
+        New Prediction
+    </a>
 
-        SkinCheck AI is intended for research and
-        preliminary screening purposes only.
-
-    </div>
-
+    <a href="{{ url_for('history') }}" class="button">
+        View History
+    </a>
 
 </div>
 
